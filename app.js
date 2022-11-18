@@ -29,7 +29,10 @@ app.get("/compose", (req, res) =>{
 })
 
 app.post("/compose", (req, res) => {
-  console.log(req.body.newPost);
+  const newPost = {
+    postTitle: req.body.postTitle,
+    postText: req.body.postText
+  }
 })
 
 app.listen(3000, () => {
