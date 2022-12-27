@@ -5,11 +5,11 @@
   </p>
   <% posts.forEach((post)=>{%>
     <h1>
-      <%=post.postTitle%>
+      <%=post.title%>
     </h1>
     <p>
-      <%=post.postText.slice(0, 100) + "..."%>
-      <a href="posts/<%=post.postTitle%>">Read More</a>
+      <%=post.post.slice(0, 100) + "..."%>
+      <a href="posts/<%=post.title%>">Read More</a>
     </p>
     <%})%>
 <%- include('partials/footer'); -%>

@@ -26,7 +26,9 @@ const postSchema = {
 const Post = mongoose.model("post", postSchema);
 
 app.get("/", (req, res) => {
-  res.render("home", { homeStartingContent: homeStartingContent, posts: posts });
+  Post.find({}, (err, results) => {
+    res.render("home", { homeStartingContent: homeStartingContent, posts: results });
+  })
 })
 
 app.get("/about", (req, res) => {
@@ -53,12 +55,13 @@ app.get("/posts/:post", (req, res) => {
 })
 
 app.post("/compose", (req, res) => {
-  const newPost = {
-    postTitle: req.body.postTitle,
-    postText: req.body.postText
-  }
-  posts.push(newPost);
+  const newPost = new Post({
+    title: req.body.postTitle,
+    post: req.body.postText
+  })
+  newPost.save();
   res.redirect("/");
+  
 })
 
 app.listen(3000, () => {
