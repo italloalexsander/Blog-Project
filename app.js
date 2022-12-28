@@ -44,14 +44,20 @@ app.get("/compose", (req, res) => {
 })
 
 app.get("/posts/:post", (req, res) => {
-  let postPage = posts.find(i => _.lowerCase(i.postTitle) === _.lowerCase(req.params.post));
+  /*let postPage = posts.find(i => _.lowerCase(i.postTitle) === _.lowerCase(req.params.post));
   console.log(postPage);
   if(postPage){
     res.render("post", {postTitle: postPage.postTitle, postText: postPage.postText})
   }
   else{
     res.redirect("/");
-  } 
+  }*/
+  const postName = req.params.post;
+  Post.findOne({ title: postName }, (err, result) => {
+    res.render('post', {postTitle: result.title, postText: result.post});
+  })
+  
+
 })
 
 app.post("/compose", (req, res) => {
